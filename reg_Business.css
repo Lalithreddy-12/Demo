@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #2d3748;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+.business-register-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.business-register-form {
+    flex: 1;
+    max-width: 500px;
+    padding: 3rem 2rem;
+    background: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo {
+    margin-bottom: 2.5rem;
+    text-align: center;
+}
+
+.logo h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #2EC866;
+    margin-bottom: 0.5rem;
+}
+
+.logo p {
+    color: #4a5568;
+    font-size: 1.1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #2EC866;
+    box-shadow: 0 0 0 3px rgba(46, 200, 102, 0.2);
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.checkbox-group input {
+    width: auto;
+    margin-right: 0.75rem;
+}
+
+.checkbox-group label {
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+.checkbox-group a {
+    color: #2EC866;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.checkbox-group a:hover {
+    text-decoration: underline;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: #2EC866;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1.5rem;
+}
+
+.register-btn:hover {
+    background-color: #28a745;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(46, 200, 102, 0.2);
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 2rem;
+    color: #718096;
+}
+
+.login-link a {
+    color: #2EC866;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.business-register-hero {
+    flex: 1;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.hero-content {
+    max-width: 500px;
+}
+
+.hero-content h2 {
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+}
+
+.hero-content p {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.benefits {
+    margin-top: 2rem;
+}
+
+.benefit-item {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.benefit-item span {
+    margin-right: 0.75rem;
+    color: #2EC866;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .business-register-container {
+        flex-direction: column;
+    }
+    
+    .business-register-form {
+        max-width: 100%;
+        padding: 2rem 1.5rem;
+    }
+    
+    .business-register-hero {
+        padding: 3rem 1.5rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+}

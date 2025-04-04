@@ -1,0 +1,277 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #2d3748;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+.user-register-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.user-register-form {
+    flex: 1;
+    max-width: 500px;
+    padding: 3rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user-register-form h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #2d3748;
+}
+
+.subtitle {
+    color: #718096;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #2d3748;
+    font-size: 0.9rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #2EC866;
+    box-shadow: 0 0 0 3px rgba(46, 200, 102, 0.2);
+}
+
+.password-hint {
+    font-size: 0.75rem;
+    color: #718096;
+    margin-top: 0.25rem;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.checkbox-group input {
+    width: auto;
+    margin-right: 0.75rem;
+}
+
+.checkbox-group label {
+    font-weight: 400;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+.checkbox-group.terms {
+    margin: 1.5rem 0;
+}
+
+.checkbox-group a {
+    color: #2EC866;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.checkbox-group a:hover {
+    text-decoration: underline;
+}
+
+.register-btn {
+    width: 100%;
+    padding: 1rem;
+    background-color: #2EC866;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+}
+
+.register-btn:hover {
+    background-color: #28a745;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(46, 200, 102, 0.2);
+}
+
+.login-link {
+    text-align: center;
+    color: #718096;
+    font-size: 0.9rem;
+}
+
+.login-link a {
+    color: #2EC866;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.user-register-hero {
+    flex: 1;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.hero-content {
+    max-width: 500px;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #2EC866;
+}
+
+.hero-content h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.hero-content p {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.testimonial {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+    border-left: 3px solid #2EC866;
+}
+
+.testimonial p {
+    font-style: italic;
+    margin-bottom: 0.5rem;
+}
+
+.author {
+    font-weight: 600;
+}
+
+.social-login {
+    margin: 1.5rem 0;
+}
+
+.social-btn {
+    width: 100%;
+    padding: 0.8rem;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 1rem;
+}
+
+.social-btn img {
+    width: 20px;
+    height: 20px;
+    margin-right: 0.75rem;
+}
+
+.social-btn.google:hover {
+    background: #f8f9fa;
+    border-color: #d1d5db;
+}
+
+.social-btn.facebook {
+    background: #1877f2;
+    color: white;
+    border-color: #1877f2;
+}
+
+.social-btn.facebook:hover {
+    background: #166fe5;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 1.5rem 0;
+    color: #718096;
+    font-size: 0.8rem;
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.divider::before {
+    margin-right: 0.5rem;
+}
+
+.divider::after {
+    margin-left: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .user-register-container {
+        flex-direction: column;
+    }
+    
+    .user-register-form {
+        max-width: 100%;
+        padding: 2rem 1.5rem;
+    }
+    
+    .user-register-hero {
+        padding: 3rem 1.5rem;
+    }
+    
+    .hero-content h2 {
+        font-size: 1.8rem;
+    }
+    
+    .social-login {
+        margin: 1rem 0;
+    }
+}

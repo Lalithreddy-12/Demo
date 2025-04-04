@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photographers Listing | Capture Moments</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff7eb9;
+            --secondary: #7afcff;
+            --accent: #feff9c;
+            --dark: #2a2a2a;
+            --light: #f8f8f8;
+            --glass: rgba(255, 255, 255, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .glass-container {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            width: 100%;
+            max-width: 1200px;
+            padding: 40px;
+            margin: 20px auto;
+        }
+
+        .hero-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero-header h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            color: var(--dark);
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        /* Photographers List Styles */
+        .photographers-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .photographer-card {
+            background: var(--glass);
+            border-radius: 15px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photographer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .photographer-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .photographer-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary);
+            margin-right: 20px;
+        }
+
+        .photographer-info h3 {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 5px;
+        }
+
+        .photographer-info .specialty {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .photographer-rating {
+            color: var(--accent);
+            margin-top: 5px;
+        }
+
+        .photographer-details {
+            margin: 20px 0;
+        }
+
+        .detail-section {
+            margin-bottom: 15px;
+        }
+
+        .detail-section h4 {
+            color: var(--dark);
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-section h4 i {
+            color: var(--primary);
+        }
+
+        .equipment-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .equipment-tag {
+            background: rgba(255, 126, 185, 0.2);
+            color: var(--dark);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .pricing-table th, .pricing-table td {
+            padding: 8px 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .pricing-table th {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .pricing-table td {
+            color: var(--dark);
+        }
+
+        .booking-section {
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .price-highlight {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 10px 0;
+        }
+
+        .book-btn {
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .book-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 126, 185, 0.4);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .modal h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .submit-booking {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .submit-booking:hover {
+            background: #ff5ca1;
+        }
+
+        @media (max-width: 768px) {
+            .glass-container {
+                padding: 20px;
+            }
+            
+            .hero-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .photographers-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .photographer-header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .photographer-avatar {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="glass-container">
+        <div class="hero-header">
+            <h1>Our Photographers</h1>
+            <p class="tagline">Professional photographers with top-tier equipment ready to capture your special moments</p>
+        </div>
+
+        <div class="photographers-list">
+            <!-- Photographer 1 -->
+            <div class="photographer-card">
+                <div class="photographer-header">
+                    <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Sarah Johnson" class="photographer-avatar">
+                    <div class="photographer-info">
+                        <h3>Sarah Johnson</h3>
+                        <span class="specialty">Wedding & Portrait</span>
+                        <div class="photographer-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(128 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="photographer-details">
+                    <div class="detail-section">
+                        <h4><i class="fas fa-camera"></i> Equipment</h4>
+                        <div class="equipment-list">
+                            <span class="equipment-tag">Canon EOS R5</span>
+                            <span class="equipment-tag">Sony A7 IV</span>
+                            <span class="equipment-tag">70-200mm f/2.8</span>
+                            <span class="equipment-tag">24-70mm f/2.8</span>
+                            <span class="equipment-tag">Profoto Lighting</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-dollar-sign"></i> Pricing</h4>
+                        <table class="pricing-table">
+                            <tr>
+                                <th>Service</th>
+                                <th>Price</th>
+                            </tr>
+                            <tr>
+                                <td>Portrait Session</td>
+                                <td>$250</td>
+                            </tr>
+                            <tr>
+                                <td>Wedding (Full Day)</td>
+                                <td>$2,500</td>
+                            </tr>
+                            <tr>
+                                <td>Event Photography</td>
+                                <td>$150/hr</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="booking-section">
+                    <div class="price-highlight">Starting at $150/hr</div>
+                    <button class="book-btn" onclick="openModal('Sarah Johnson')">Book Now</button>
+                </div>
+            </div>
+            
+            <!-- Photographer 2 -->
+            <div class="photographer-card">
+                <div class="photographer-header">
+                    <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Michael Chen" class="photographer-avatar">
+                    <div class="photographer-info">
+                        <h3>Michael Chen</h3>
+                        <span class="specialty">Commercial & Product</span>
+                        <div class="photographer-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(96 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="photographer-details">
+                    <div class="detail-section">
+                        <h4><i class="fas fa-camera"></i> Equipment</h4>
+                        <div class="equipment-list">
+                            <span class="equipment-tag">Fujifilm GFX 100S</span>
+                            <span class="equipment-tag">Nikon Z7 II</span>
+                            <span class="equipment-tag">Macro 100mm f/2.8</span>
+                            <span class="equipment-tag">Studio Strobes</span>
+                            <span class="equipment-tag">Light Tent</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-dollar-sign"></i> Pricing</h4>
+                        <table class="pricing-table">
+                            <tr>
+                                <th>Service</th>
+                                <th>Price</th>
+                            </tr>
+                            <tr>
+                                <td>Product Photography</td>
+                                <td>$120/hr</td>
+                            </tr>
+                            <tr>
+                                <td>E-commerce (per item)</td>
+                                <td>$25</td>
+                            </tr>
+                            <tr>
+                                <td>Commercial Shoot</td>
+                                <td>$800/day</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="booking-section">
+                    <div class="price-highlight">Starting at $120/hr</div>
+                    <button class="book-btn" onclick="openModal('Michael Chen')">Book Now</button>
+                </div>
+            </div>
+            
+            <!-- Photographer 3 -->
+            <div class="photographer-card">
+                <div class="photographer-header">
+                    <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma Rodriguez" class="photographer-avatar">
+                    <div class="photographer-info">
+                        <h3>Emma Rodriguez</h3>
+                        <span class="specialty">Fashion & Editorial</span>
+                        <div class="photographer-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(87 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="photographer-details">
+                    <div class="detail-section">
+                        <h4><i class="fas fa-camera"></i> Equipment</h4>
+                        <div class="equipment-list">
+                            <span class="equipment-tag">Sony A7R IV</span>
+                            <span class="equipment-tag">Canon 5D Mark IV</span>
+                            <span class="equipment-tag">85mm f/1.4</span>
+                            <span class="equipment-tag">24-105mm f/4</span>
+                            <span class="equipment-tag">Continuous Lighting</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-dollar-sign"></i> Pricing</h4>
+                        <table class="pricing-table">
+                            <tr>
+                                <th>Service</th>
+                                <th>Price</th>
+                            </tr>
+                            <tr>
+                                <td>Fashion Shoot</td>
+                                <td>$300/hr</td>
+                            </tr>
+                            <tr>
+                                <td>Lookbook (10 looks)</td>
+                                <td>$1,200</td>
+                            </tr>
+                            <tr>
+                                <td>Editorial Session</td>
+                                <td>$500/half-day</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="booking-section">
+                    <div class="price-highlight">Starting at $300/hr</div>
+                    <button class="book-btn" onclick="openModal('Emma Rodriguez')">Book Now</button>
+                </div>
+            </div>
+            
+            <!-- Photographer 4 -->
+            <div class="photographer-card">
+                <div class="photographer-header">
+                    <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="David Kim" class="photographer-avatar">
+                    <div class="photographer-info">
+                        <h3>David Kim</h3>
+                        <span class="specialty">Landscape & Travel</span>
+                        <div class="photographer-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(142 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="photographer-details">
+                    <div class="detail-section">
+                        <h4><i class="fas fa-camera"></i> Equipment</h4>
+                        <div class="equipment-list">
+                            <span class="equipment-tag">Nikon D850</span>
+                            <span class="equipment-tag">Sony A7R III</span>
+                            <span class="equipment-tag">14-24mm f/2.8</span>
+                            <span class="equipment-tag">70-200mm f/2.8</span>
+                            <span class="equipment-tag">ND Filters</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-dollar-sign"></i> Pricing</h4>
+                        <table class="pricing-table">
+                            <tr>
+                                <th>Service</th>
+                                <th>Price</th>
+                            </tr>
+                            <tr>
+                                <td>Location Shoot</td>
+                                <td>$200/hr</td>
+                            </tr>
+                            <tr>
+                                <td>Travel Assignment</td>
+                                <td>$1,500/day</td>
+                            </tr>
+                            <tr>
+                                <td>Workshop (per person)</td>
+                                <td>$350</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="booking-section">
+                    <div class="price-highlight">Starting at $200/hr</div>
+                    <button class="book-btn" onclick="openModal('David Kim')">Book Now</button>
+                </div>
+            </div>
+            
+            <!-- Photographer 5 -->
+            <div class="photographer-card">
+                <div class="photographer-header">
+                    <img src="https://randomuser.me/api/portraits/women/54.jpg" alt="Lisa Patel" class="photographer-avatar">
+                    <div class="photographer-info">
+                        <h3>Lisa Patel</h3>
+                        <span class="specialty">Newborn & Family</span>
+                        <div class="photographer-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(113 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="photographer-details">
+                    <div class="detail-section">
+                        <h4><i class="fas fa-camera"></i> Equipment</h4>
+                        <div class="equipment-list">
+                            <span class="equipment-tag">Canon EOS R6</span>
+                            <span class="equipment-tag">Sony A7 III</span>
+                            <span class="equipment-tag">50mm f/1.2</span>
+                            <span class="equipment-tag">35mm f/1.4</span>
+                            <span class="equipment-tag">Softboxes</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-dollar-sign"></i> Pricing</h4>
+                        <table class="pricing-table">
+                            <tr>
+                                <th>Service</th>
+                                <th>Price</th>
+                            </tr>
+                            <tr>
+                                <td>Newborn Session</td>
+                                <td>$350</td>
+                            </tr>
+                            <tr>
+                                <td>Family Portrait</td>
+                                <td>$280</td>
+                            </tr>
+                            <tr>
+                                <td>Maternity Shoot</td>
+                                <td>$320</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="booking-section">
+                    <div class="price-highlight">Starting at $280/session</div>
+                    <button class="book-btn" onclick="openModal('Lisa Patel')">Book Now</button>
+                </div>
+            </div>
+            
+            <!-- Photographer 6 -->
+            <div class="photographer-card">
+                <div class="photographer-header">
+                    <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="James Wilson" class="photographer-avatar">
+                    <div class="photographer-info">
+                        <h3>James Wilson</h3>
+                        <span class="specialty">Sports & Action</span>
+                        <div class="photographer-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(76 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="photographer-details">
+                    <div class="detail-section">
+                        <h4><i class="fas fa-camera"></i> Equipment</h4>
+                        <div class="equipment-list">
+                            <span class="equipment-tag">Canon 1DX Mark III</span>
+                            <span class="equipment-tag">Nikon D6</span>
+                            <span class="equipment-tag">400mm f/2.8</span>
+                            <span class="equipment-tag">70-200mm f/2.8</span>
+                            <span class="equipment-tag">Monopod</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-dollar-sign"></i> Pricing</h4>
+                        <table class="pricing-table">
+                            <tr>
+                                <th>Service</th>
+                                <th>Price</th>
+                            </tr>
+                            <tr>
+                                <td>Game Coverage</td>
+                                <td>$350/event</td>
+                            </tr>
+                            <tr>
+                                <td>Action Session</td>
+                                <td>$250/hr</td>
+                            </tr>
+                            <tr>
+                                <td>Tournament (full day)</td>
+                                <td>$1,200</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="booking-section">
+                    <div class="price-highlight">Starting at $250/hr</div>
+                    <button class="book-btn" onclick="openModal('James Wilson')">Book Now</button>
+                </div>
+            </div>
+            
+            <!-- Photographer 7 -->
+            <div class="photographer-card">
+                <div class="photographer-header">
+                    <img src="https://randomuser.me/api/portraits/women/29.jpg" alt="Olivia Martinez" class="photographer-avatar">
+                    <div class="photographer-info">
+                        <h3>Olivia Martinez</h3>
+                        <span class="specialty">Food & Beverage</span>
+                        <div class="photographer-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(94 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="photographer-details">
+                    <div class="detail-section">
+                        <h4><i class="fas fa-camera"></i> Equipment</h4>
+                        <div class="equipment-list">
+                            <span class="equipment-tag">Fujifilm X-T4</span>
+                            <span class="equipment-tag">Canon 5DS R</span>
+                            <span class="equipment-tag">100mm Macro</span>
+                            <span class="equipment-tag">Tilt-Shift Lens</span>
+                            <span class="equipment-tag">Reflectors</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-dollar-sign"></i> Pricing</h4>
+                        <table class="pricing-table">
+                            <tr>
+                                <th>Service</th>
+                                <th>Price</th>
+                            </tr>
+                            <tr>
+                                <td>Menu Photography</td>
+                                <td>$75/dish</td>
+                            </tr>
+                            <tr>
+                                <td>Commercial Food</td>
+                                <td>$150/hr</td>
+                            </tr>
+                            <tr>
+                                <td>Recipe Development</td>
+                                <td>$1,000/project</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="booking-section">
+                    <div class="price-highlight">Starting at $75/dish</div>
+                    <button class="book-btn" onclick="openModal('Olivia Martinez')">Book Now</button>
+                </div>
+            </div>
+            
+            <!-- Photographer 8 -->
+            <div class="photographer-card">
+                <div class="photographer-header">
+                    <img src="https://randomuser.me/api/portraits/men/33.jpg" alt="Robert Taylor" class="photographer-avatar">
+                    <div class="photographer-info">
+                        <h3>Robert Taylor</h3>
+                        <span class="specialty">Architecture & Real Estate</span>
+                        <div class="photographer-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(105 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="photographer-details">
+                    <div class="detail-section">
+                        <h4><i class="fas fa-camera"></i> Equipment</h4>
+                        <div class="equipment-list">
+                            <span class="equipment-tag">Sony A7R IV</span>
+                            <span class="equipment-tag">DJI Mavic 3</span>
+                            <span class="equipment-tag">16-35mm f/4</span>
+                            <span class="equipment-tag">Tilt-Shift Lens</span>
+                            <span class="equipment-tag">Tripod</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-dollar-sign"></i> Pricing</h4>
+                        <table class="pricing-table">
+                            <tr>
+                                <th>Service</th>
+                                <th>Price</th>
+                            </tr>
+                            <tr>
+                                <td>Real Estate (per property)</td>
+                                <td>$250</td>
+                            </tr>
+                            <tr>
+                                <td>Architecture Interior</td>
+                                <td>$150/hr</td>
+                            </tr>
+                            <tr>
+                                <td>Aerial Photography</td>
+                                <td>$350/session</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="booking-section">
+                    <div class="price-highlight">Starting at $150/hr</div>
+                    <button class="book-btn" onclick="openModal('Robert Taylor')">Book Now</button>
+                </div>
+            </div>
+            
+            <!-- Photographer 9 -->
+            <div class="photographer-card">
+                <div class="photographer-header">
+                    <img src="https://randomuser.me/api/portraits/women/17.jpg" alt="Sophia Lee" class="photographer-avatar">
+                    <div class="photographer-info">
+                        <h3>Sophia Lee</h3>
+                        <span class="specialty">Pet & Animal</span>
+                        <div class="photographer-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(88 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="photographer-details">
+                    <div class="detail-section">
+                        <h4><i class="fas fa-camera"></i> Equipment</h4>
+                        <div class="equipment-list">
+                            <span class="equipment-tag">Canon R5</span>
+                            <span class="equipment-tag">Sony A9 II</span>
+                            <span class="equipment-tag">70-200mm f/2.8</span>
+                            <span class="equipment-tag">24-70mm f/2.8</span>
+                            <span class="equipment-tag">Treats & Toys</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-dollar-sign"></i> Pricing</h4>
+                        <table class="pricing-table">
+                            <tr>
+                                <th>Service</th>
+                                <th>Price</th>
+                            </tr>
+                            <tr>
+                                <td>Pet Portrait Session</td>
+                                <td>$200</td>
+                            </tr>
+                            <tr>
+                                <td>Multiple Pets</td>
+                                <td>$250</td>
+                            </tr>
+                            <tr>
+                                <td>Action Shots</td>
+                                <td>$175/hr</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="booking-section">
+                    <div class="price-highlight">Starting at $175/hr</div>
+                    <button class="book-btn" onclick="openModal('Sophia Lee')">Book Now</button>
+                </div>
+            </div>
+            
+            <!-- Photographer 10 -->
+            <div class="photographer-card">
+                <div class="photographer-header">
+                    <img src="https://randomuser.me/api/portraits/men/88.jpg" alt="Daniel Brown" class="photographer-avatar">
+                    <div class="photographer-info">
+                        <h3>Daniel Brown</h3>
+                        <span class="specialty">Concert & Events</span>
+                        <div class="photographer-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(132 reviews)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="photographer-details">
+                    <div class="detail-section">
+                        <h4><i class="fas fa-camera"></i> Equipment</h4>
+                        <div class="equipment-list">
+                            <span class="equipment-tag">Sony A7S III</span>
+                            <span class="equipment-tag">Canon R3</span>
+                            <span class="equipment-tag">24-70mm f/2.8</span>
+                            <span class="equipment-tag">Fast Prime Lenses</span>
+                            <span class="equipment-tag">Low-light Gear</span>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h4><i class="fas fa-dollar-sign"></i> Pricing</h4>
+                        <table class="pricing-table">
+                            <tr>
+                                <th>Service</th>
+                                <th>Price</th>
+                            </tr>
+                            <tr>
+                                <td>Concert Coverage</td>
+                                <td>$300/event</td>
+                            </tr>
+                            <tr>
+                                <td>Corporate Event</td>
+                                <td>$200/hr</td>
+                            </tr>
+                            <tr>
+                                <td>Festival (full day)</td>
+                                <td>$1,500</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                
+                <div class="booking-section">
+                    <div class="price-highlight">Starting at $200/hr</div>
+                    <button class="book-btn" onclick="openModal('Daniel Brown')">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Booking Modal -->
+    <div class="modal" id="bookingModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>Book <span id="photographerName"></span></h3>
+            
+            <form id="bookingForm">
+                <div class="form-group">
+                    <label for="serviceType">Service Type</label>
+                    <select id="serviceType" required>
+                        <option value="">Select a service</option>
+                        <option value="portrait">Portrait Session</option>
+                        <option value="wedding">Wedding Photography</option>
+                        <option value="event">Event Coverage</option>
+                        <option value="commercial">Commercial Shoot</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bookingDate">Date</label>
+                    <input type="date" id="bookingDate" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="bookingTime">Time</label>
+                    <input type="time" id="bookingTime" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="duration">Duration</label>
+                    <select id="duration" required>
+                        <option value="1">1 hour</option>
+                        <option value="2">2 hours</option>
+                        <option value="3">3 hours</option>
+                        <option value="4">4 hours</option>
+                        <option value="full">Full day (8 hours)</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" placeholder="Where will the shoot take place?" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="specialRequests">Special Requests</label>
+                    <textarea id="specialRequests" rows="3" placeholder="Any special requirements or notes..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactEmail">Email</label>
+                    <input type="email" id="contactEmail" placeholder="Your email address" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactPhone">Phone</label>
+                    <input type="tel" id="contactPhone" placeholder="Your phone number" required>
+                </div>
+                
+                <button type="submit" class="submit-booking">Submit Booking Request</button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Modal functionality
+        function openModal(photographer) {
+            document.getElementById('photographerName').textContent = photographer;
+            document.getElementById('bookingModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+            document.body

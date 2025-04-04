@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnaFist - Find & Hire Professional Photographers</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                        url('background.jpeg') no-repeat center center/cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 80px;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <div class="logo">SnaFist</div>
+                <ul class="nav-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#collections">Collections</a></li>
+                    <li><a href="#photographers">For Photographers</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><button class="login-btn user" onclick="location.href='login.html'">Login</button></li>
+                </ul>
+                <div class="hamburger" onclick="toggleMenu()">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+    
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Discover & Hire Top Photographers</h1>
+            <p>Find the perfect photographer for your special moments</p>
+            <div class="search-bar">
+                <input type="text" placeholder="Search for photographers, events, or locations...">
+                <button><i class="fas fa-search"></i> Search</button>
+            </div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Professional Photographers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">10K+</span>
+                    <span class="stat-label">Successful Bookings</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="collections" id="collections">
+        <div class="section-header">
+            <h2>Popular Photography Services</h2>
+            <a href="#" class="view-all">View All <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="collection-grid">
+            <a onclick="location.href='baby.html'" class="card-link">
+                <div class="collection-card">
+                    <div class="card-image">
+                        <img src="baby.jpg" alt="Baby Shoot">
+                    </div>
+                    <h3>Baby Photography</h3>
+                    <p class="price">Starting at ₹5,000</p>
+                </div>
+            </a>
+            <a onclick="location.href='wedding-card.html'" class="card-link">
+                <div class="collection-card">
+                    <div class="card-image">
+                        <img src="wedding.jpg" alt="Wedding Shoots">
+                    </div>
+                    <h3>Wedding Photography</h3>
+                    <p class="price">Starting at ₹25,000</p>
+                </div>
+            </a>
+            <a onclick="location.href='candid.html'" class="card-link">
+                <div class="collection-card">
+                    <div class="card-image">
+                        <img src="Candid1.jpg" alt="Candids">
+                    </div>
+                    <h3>Candid Photography</h3>
+                    <p class="price">Starting at ₹8,000</p>
+                </div>
+            </a>
+            <a onclick="location.href='fashion-card.html'" class="card-link">
+                <div class="collection-card">
+                    <div class="card-image">
+                        <img src="fashion.jpg" alt="Fashion Photography">
+                    </div>
+                    <h3>Fashion Photography</h3>
+                    <p class="price">Starting at ₹15,000</p>
+                </div>
+            </a>
+        </div>
+    </section>
+    
+    <section class="photographers" id="photographers">
+        <div class="section-header">
+            <h2>For Photographers</h2>
+            <p>Showcase your talent to thousands of potential clients</p>
+        </div>
+        <div class="photographer-cta">
+            <div class="cta-content">
+                <h3>Join Our Community</h3>
+                <p>Get more visibility, bookings, and grow your photography business</p>
+                <button class="cta-button" onclick="location.href='login.html'">Register as Photographer</button>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <div class="logo">SnaFist</div>
+                <p>Connecting clients with the best photographers</p>
+            </div>
+            <div class="footer-links">
+                <div class="link-group">
+                    <h4>Company</h4>
+                    <a href="#">About Us</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Blog</a>
+                </div>
+                <div class="link-group">
+                    <h4>Support</h4>
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Snafist. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script src="proto.js"></script>
+</body>
+</html>

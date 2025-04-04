@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnaFist - Business Registration</title>
+    <link rel="stylesheet" href="reg_Business.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="business-register-container">
+        <div class="business-register-form">
+            <div class="logo">
+                <h1>SnaFist</h1>
+                <p>For Business</p>
+            </div>
+            
+            <form id="businessRegisterForm">
+                <div class="form-group">
+                    <label for="companyName">Company Name</label>
+                    <input type="text" id="companyName" name="companyName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="industry">Industry</label>
+                    <select id="industry" name="industry" required>
+                        <option value="">Select your industry</option>
+                        <option value="fashion">Fashion & Apparel</option>
+                        <option value="ecommerce">E-commerce</option>
+                        <option value="advertising">Advertising</option>
+                        <option value="media">Media & Publishing</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Business Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Contact Number</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required minlength="8">
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+                
+                <button type="submit" class="register-btn">Start Free Trial</button>
+            </form>
+            
+            <div class="login-link">
+                Already have an account? <a href="#">Login</a>
+            </div>
+        </div>
+        
+        <div class="business-register-hero">
+            <div class="hero-content">
+                <h2>Expand Your Reach with Professional Photography</h2>
+                <p>Join our network of businesses and connect with top-tier photographers to elevate your brand imagery.</p>
+                <div class="benefits">
+                    <div class="benefit-item">
+                        <span>✓</span> Access to vetted professionals
+                    </div>
+                    <div class="benefit-item">
+                        <span>✓</span> Streamlined project management
+                    </div>
+                    <div class="benefit-item">
+                        <span>✓</span> Competitive pricing
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
